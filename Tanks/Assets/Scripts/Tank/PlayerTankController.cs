@@ -24,7 +24,7 @@ public class PlayerTankController : MonoBehaviour {
         rotSpeed = 150.0f;
         //Get the turret of the tank      
         Turret = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).transform;
-        //bulletSpawnPoint = Turret.GetChild(0).transform; 
+        bulletSpawnPoint = Turret.GetChild(0).transform; 
     }
 
     // Update is called once per frame
@@ -86,10 +86,11 @@ public class PlayerTankController : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            elapsedTime += Time.deltaTime; if (elapsedTime >= shootRate)
+            print("shot fired");
+           // elapsedTime += Time.deltaTime; if (elapsedTime >= shootRate)
             {          
                 //Reset the time          
-                elapsedTime = 0.0f;
+           //     elapsedTime = 0.0f;
                 //Instantiate the bullet          
                 Instantiate(Bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             }
