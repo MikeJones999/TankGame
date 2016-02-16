@@ -12,9 +12,9 @@ public class PlayerTankController : MonoBehaviour {
     private float maxForwardSpeed = 15.0f;  //these are reversed
     private float maxBackwardSpeed = -25.0f;
     //Bullet shooting rate    
-    protected float shootRate = 0.5f;
-    protected float elapsedTime;
-
+    public float shootRate = 0.5f;
+    protected float elapsedTime = 0.0f;
+    public Boolean isInstantReloading = false;
 
 
     // Use this for initialization
@@ -24,7 +24,7 @@ public class PlayerTankController : MonoBehaviour {
         rotSpeed = 150.0f;
         //Get the turret of the tank      
         Turret = gameObject.transform.GetChild(1).GetChild(0).GetChild(0).transform;
-        bulletSpawnPoint = Turret.GetChild(0).transform; 
+        bulletSpawnPoint = Turret.GetChild(0).GetChild(0).transform; 
     }
 
     // Update is called once per frame
@@ -84,17 +84,30 @@ public class PlayerTankController : MonoBehaviour {
 
     private void UpdateWeapon()
     {
+        elapsedTime += Time.deltaTime;
         if (Input.GetMouseButtonDown(0))
         {
-            print("shot fired");
-           // elapsedTime += Time.deltaTime; if (elapsedTime >= shootRate)
-            {          
-                //Reset the time          
-           //     elapsedTime = 0.0f;
-                //Instantiate the bullet          
-                Instantiate(Bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+           //print("shot fired");
+
+            if (isInstantReloading)
+            {
+                instantiateMissile();            }
+            else
+            {
+                if (elapsedTime >= shootRate)
+                {
+                    //Reset the time          
+                    elapsedTime = 0.0f;
+                    //Instantiate the bullet          
+                    instantiateMissile();
+                }
             }
         }
     }
 
+
+     private void instantiateMissile()
+    {
+        Instantiate(Bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+    }
 }

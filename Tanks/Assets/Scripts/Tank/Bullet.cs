@@ -3,7 +3,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {    //Explosion Effect   
    // public GameObject Explosion;
-    public float Speed = 600.0f;
+    public float Speed = 100.0f;
     public float LifeTime = 3.0f;
     public int damage = 50;
     void Start()
@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, LifeTime);
     }
     void Update() {
-        transform.position += -transform.forward * Speed * Time.deltaTime;
+        transform.position += transform.forward * Speed * Time.deltaTime;
     }
     void OnCollisionEnter(Collision collision) {
         ContactPoint contact = collision.contacts[0];
