@@ -71,8 +71,7 @@ public class SimpleFSM : FSM {
         //Set the target position as the player position
         destPos = playerTransform.position;
         //Check the distance with the player tank
-        float dist = Vector3.Distance(transform.position,
-        playerTransform.position);
+        float dist = Vector3.Distance(transform.position, playerTransform.position);
         if (dist >= 200.0f && dist < 300.0f)
         {
             //Rotate to the target point
@@ -93,12 +92,8 @@ public class SimpleFSM : FSM {
             curState = FSMState.Patrol;
             }
             //Always Turn the turret towards the player
-            Quaternion turretRotation =
-            Quaternion.LookRotation(destPos
-            - turret.position);
-            turret.rotation =
-            Quaternion.Slerp(turret.rotation, turretRotation,
-            Time.deltaTime* curRotSpeed);
+            Quaternion turretRotation =  Quaternion.LookRotation(destPos - turret.position);
+            turret.rotation =  Quaternion.Slerp(turret.rotation, turretRotation, Time.deltaTime* curRotSpeed);
             //Shoot the bullets
             ShootBullet();
           }
