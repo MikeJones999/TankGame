@@ -43,19 +43,20 @@ public class PatrolState : State
     public void updateState()
     {
 
-        if (Vector3.Distance(tank.position, playerTransform.position) <= 30.0f)
-        {
-            Debug.Log("Switch to Attack state");
-            if(enemySigthted == false) enemySigthted = true;
-            //if enemy tank found switch to attack state
-            //manager.switchState(new AttackState());
-        }
-        else if (Vector3.Distance(tank.position, playerTransform.position) <= 50.0f && Vector3.Distance(tank.position, playerTransform.position) > 30.0f)
+        //if (Vector3.Distance(tank.position, playerTransform.position) <= 30.0f)
+        //{
+        //    Debug.Log("Switch to Attack state");
+        //    if(enemySigthted == false) enemySigthted = true;
+        //    //if enemy tank found switch to attack state
+        //    //manager.switchState(new AttackState());
+        //}
+        //else 
+        if (Vector3.Distance(tank.position, playerTransform.position) <= 80.0f && Vector3.Distance(tank.position, playerTransform.position) > 30.0f)
         {
             Debug.Log("Switch to Chase state");
             if (enemySigthted == false) enemySigthted = true;
             //if enemy tank found switch to attack state
-            //manager.switchState(new ChaseState(manager));
+            manager.switchState(new ChaseState(manager, playerTransform));
 
         }
         else
@@ -71,8 +72,7 @@ public class PatrolState : State
             {
             
                 Debug.Log("Patrolling state " + tank.ToString());
-                patrolling = true;
-               
+                patrolling = true;             
 
                 Quaternion targetRotation = Quaternion.LookRotation(destPos - tank.position);
                 Debug.Log("waypoint pos: " + destPos);

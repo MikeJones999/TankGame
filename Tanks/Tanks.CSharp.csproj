@@ -79,6 +79,8 @@
     <Compile Include="Assets\Scripts\Tank\FSM.cs" />
     <Compile Include="Assets\Scripts\Tank\PlayerTankController.cs" />
     <Compile Include="Assets\Scripts\Tank\SimpleFSM.cs" />
+    <Compile Include="Assets\Scripts\Tank\StateManagement\AttackState.cs" />
+    <Compile Include="Assets\Scripts\Tank\StateManagement\ChaseState.cs" />
     <Compile Include="Assets\Scripts\Tank\StateManagement\PatrolState.cs" />
     <Compile Include="Assets\Scripts\Tank\StateManagement\State.cs" />
     <Compile Include="Assets\Scripts\Tank\StateManagement\StateManager.cs" />
