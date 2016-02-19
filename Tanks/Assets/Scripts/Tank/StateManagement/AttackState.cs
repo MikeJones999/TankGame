@@ -77,8 +77,6 @@ public class AttackState : State
         if (elapsedTime >= shootRate)
         {
             //Shoot the bullet
-
-
             GameObject.Instantiate (manager.getMissile(), bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             elapsedTime = 0.0f;
         }

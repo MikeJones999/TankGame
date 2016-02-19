@@ -166,7 +166,7 @@ private void ShootBullet()
     protected void UpdatePatrolState()
     {      //Find another random patrol point if the current       
            //point is reached     
-        if (Vector3.Distance(transform.position, destPos) <=       100.0f)
+        if (Vector3.Distance(transform.position, destPos) <= 100.0f)
         {
             print("Reached to the destination point\n"+ "calculating the next point");
             FindNextPoint();
@@ -212,8 +212,7 @@ private void ShootBullet()
         //Reduce health
         if (collision.gameObject.tag == "Bullet")
         {
-            health -= collision.gameObject.GetComponent
-            <Bullet>().damage;
+            health -= collision.gameObject.GetComponent<Bullet>().damage;
         }
     }
 
