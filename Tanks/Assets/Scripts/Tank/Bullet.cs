@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
     public float LifeTime = 3.0f;
     public int damage = 10;
     public GameObject explosion;
-    private bool hasCollided = false;
 
     void Start()
     {
@@ -15,17 +14,14 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        if (!hasCollided)
-        {
             transform.position += transform.forward * Speed * Time.deltaTime;
-        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        ContactPoint contact = collision.contacts[0];
-        hasCollided = true;
         Destroy(gameObject);
+        ContactPoint contact = collision.contacts[0];
+ 
         GameObject objHit = collision.gameObject;
         if (objHit.tag == "AI Tank")
         {

@@ -64,9 +64,9 @@ public class StateManager : MonoBehaviour {
     protected void explode()
     {
         Debug.Log("Vehicle destroyed!!!!!!!!!!!!!!");
-        Object exp = Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
-        Destroy(exp, 10.0f);
+        Object exp = Instantiate(explosion, gameObject.transform.position, Quaternion.identity); 
         Destroy(tank);
+        Destroy(exp, 3.0f);
     }
 
 }
