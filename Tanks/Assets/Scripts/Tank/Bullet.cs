@@ -5,8 +5,9 @@ public class Bullet : MonoBehaviour
    // public GameObject Explosion;
     public float Speed = 100.0f;
     public float LifeTime = 3.0f;
-    public int damage = 50;
+    public int damage = 10;
     public GameObject explosion;
+    private bool hasCollided = false;
 
     void Start()
     {
@@ -14,25 +15,35 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        transform.position += transform.forward * Speed * Time.deltaTime;
+        if (!hasCollided)
+        {
+            transform.position += transform.forward * Speed * Time.deltaTime;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        ContactPoint contact = collision.contacts[0];
+        hasCollided = true;
+        Destroy(gameObject);
         GameObject objHit = collision.gameObject;
-        if (objHit.tag == "AI Tank" || objHit.tag == "Player")
+        if (objHit.tag == "AI Tank")
         {
-            ContactPoint contact = collision.contacts[0];
-            Instantiate(explosion, contact.point, Quaternion.identity);
-            Destroy(gameObject);
+            int health = objHit.GetComponent<StateManager>().getHealth();
+            Debug.Log("****************** Health: " + health);
+           
+           
+            Object exp = Instantiate(explosion, contact.point, Quaternion.identity);
+            health -= 10;
+            objHit.GetComponent<StateManager>().setHealth(health);
+            Destroy(exp, 0.5f);
+        }
+        else if (objHit.tag == "Player")
+        {
+            Object exp = Instantiate(explosion, contact.point, Quaternion.identity);
+            Destroy(exp, 0.5f);
         }
     }
 
-    void Explode()
-    {
-        var exp = GetComponent<ParticleSystem>();
-        exp.Play();
-        Destroy(gameObject, exp.duration);
-    }
 }
 

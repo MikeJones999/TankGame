@@ -9,7 +9,6 @@ public class ChaseState : State
     protected Transform tank;
     private float maxBackwardSpeed = 20.0f;
     private float curRotSpeed = 2.0f;
-    private Boolean patrolling = true;
     protected Vector3 destPos;
     protected Transform playerTransform;
     protected Boolean enemySigthted = false;
@@ -64,11 +63,7 @@ public class ChaseState : State
         turretRotation *= Quaternion.Euler(0, 90, 0); //adds 90 degrees
         turret.transform.rotation = Quaternion.Slerp(turret.rotation, turretRotation, Time.deltaTime * curRotSpeed);
 
-            Debug.Log("Chasing state " + tank.ToString());
-            patrolling = true;
-
             Quaternion targetRotation = Quaternion.LookRotation(destPos - tank.position);
-            Debug.Log("waypoint pos: " + destPos);
 
             tank.rotation = Quaternion.Slerp(tank.rotation, targetRotation, Time.deltaTime * curRotSpeed);
             //Go Forward    

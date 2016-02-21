@@ -27,9 +27,8 @@ public class AttackState : State
 
     public void executeState()
     {
-        destPos = playerTransform.position;
+        destPos = playerTransform.position; 
         targetAndFire();
-
     }
 
   
@@ -37,6 +36,7 @@ public class AttackState : State
     public void updateState()
     {
         elapsedTime += Time.deltaTime;
+
         if (Vector3.Distance(tank.position, playerTransform.position) > 60  && Vector3.Distance(tank.position, playerTransform.position) <= 80)
         {
             Debug.Log("Switch to Chase state");
@@ -58,25 +58,28 @@ public class AttackState : State
     {
         fire();
 
-        Quaternion turretRotation = Quaternion.LookRotation(destPos - turret.position);
-        turretRotation *= Quaternion.Euler(0, 90, 0); //adds 90 degrees
-        turret.transform.rotation = Quaternion.Slerp(turret.rotation, turretRotation, Time.deltaTime * curRotSpeed);
+       
+            Quaternion turretRotation = Quaternion.LookRotation(destPos - turret.position);
+            turretRotation *= Quaternion.Euler(0, 90, 0); //adds 90 degrees
+            turret.transform.rotation = Quaternion.Slerp(turret.rotation, turretRotation, Time.deltaTime * curRotSpeed);
 
-        Debug.Log("Chasing state " + tank.ToString());  
+        if (Vector3.Distance(tank.position, playerTransform.position) > 45)
+        {
+            //Debug.Log("Chasing state " + tank.ToString());
 
-        Quaternion targetRotation = Quaternion.LookRotation(destPos - tank.position);
-        Debug.Log("waypoint pos: " + destPos);
+            Quaternion targetRotation = Quaternion.LookRotation(destPos - tank.position);
 
-        tank.rotation = Quaternion.Slerp(tank.rotation, targetRotation, Time.deltaTime * curRotSpeed);
-        //Go Forward    
-        tank.Translate(Vector3.forward * Time.deltaTime * maxBackwardSpeed);
+            tank.rotation = Quaternion.Slerp(tank.rotation, targetRotation, Time.deltaTime * curRotSpeed);
+            //Go Forward    
+            tank.Translate(Vector3.forward * Time.deltaTime * maxBackwardSpeed);
+        }
     }
 
     private void fire()
     {
         if (elapsedTime >= shootRate)
         {
-            //Shoot the bullet
+            //Shoot the missile
             GameObject.Instantiate (manager.getMissile(), bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             elapsedTime = 0.0f;
         }

@@ -86,20 +86,19 @@ public class PlayerTankController : MonoBehaviour {
     {
         elapsedTime += Time.deltaTime;
         if (Input.GetMouseButtonDown(0))
-        {
-           //print("shot fired");
-
+        { 
             if (isInstantReloading)
             {
-                instantiateMissile();            }
+                instantiateMissile();
+            }
             else
             {
                 if (elapsedTime >= shootRate)
-                {
-                    //Reset the time          
-                    elapsedTime = 0.0f;
+                {                  
                     //Instantiate the bullet          
                     instantiateMissile();
+                    //Reset the time          
+                    elapsedTime = 0.0f;
                 }
             }
         }

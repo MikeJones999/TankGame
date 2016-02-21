@@ -71,11 +71,11 @@ public class PatrolState : State
             if ((Vector3.Distance(tank.position, destPos) >= 40.0f))
             {
             
-                Debug.Log("Patrolling state " + tank.ToString());
+             //   Debug.Log("Patrolling state " + tank.ToString());
                 patrolling = true;             
 
                 Quaternion targetRotation = Quaternion.LookRotation(destPos - tank.position);
-                Debug.Log("waypoint pos: " + destPos);
+              //  Debug.Log("waypoint pos: " + destPos);
 
                 tank.rotation = Quaternion.Slerp(tank.rotation, targetRotation, Time.deltaTime * curRotSpeed);
                 //Go Forward    
